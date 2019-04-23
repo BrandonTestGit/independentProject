@@ -73,31 +73,7 @@ if (isset($_POST['signup-submit'])) {
           mysqli_stmt_bind_param($stmt, "sss", $username, $email, $pwdHash);
           mysqli_stmt_execute($stmt);
 
-          //PHPMailer Object
-          $mail = new PHPMailer\PHPmailer\PHPMailer();
-          $mail->IsSMTP(); // enable SMTP
-
-          $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-          $mail->SMTPAuth = true; // authentication enabled
-          $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-          $mail->Host = "smtp.gmail.com";
-          $mail->Port = 465; // or 587
-          $mail->IsHTML(true);
-          $mail->Username = "brandonmoralestestemail@gmail.com";
-          $mail->Password = "testPassword1";
-          $mail->SetFrom("brandonmoralestestemail@gmail.com","Brandon Morales");
-          $mail->Subject = "Success";
-          $mail->Body = "You have signed up successfully! Your password is: ".$password." <br>Enjoy!";
-          $mail->AddAddress($email);
-
-          if(!$mail->send())
-          {
-              echo "Mailer Error: " . $mail->ErrorInfo;
-          }
-          else
-          {
-              echo "<p>Message has been sent successfully</p>";
-          }
+          
           header("Location: ../index.php?signup=success");
 
           exit();
